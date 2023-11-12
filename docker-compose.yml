@@ -1,0 +1,66 @@
+version: "3"
+services:
+  # order:
+  #   build:
+  #     context: ./order-service/
+  #     dockerfile: Dockerfile
+  #   container_name: order
+  #   ports:
+  #     - 3000:3000
+  #   restart: always
+  #   depends_on:
+  #     - rabbitmq
+  #     - mongo
+  #   networks:
+  #     - backend
+  # kitchen:
+  #   build:
+  #     context: ./kitchen-service/
+  #     dockerfile: Dockerfile
+  #   container_name: kitchen
+  #   ports:
+  #     - 3001:3001
+  #   restart: always
+  #   depends_on:
+  #     - rabbitmq
+  #     - mongo
+  #   networks:
+  #     - backend
+  # notification:
+  #   build:
+  #     context: ./notification-service/
+  #     dockerfile: Dockerfile
+  #   container_name: notification
+  #   ports:
+  #     - 3002:3002
+  #   restart: always
+  #   depends_on:
+  #     - rabbitmq
+  #     - mongo
+  #   networks:
+  #     - backend
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq/
+    networks:
+      - backend
+  mongo:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    container_name: mongo
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+volumes:
+  rabbitmq-data:
+  mongo-data:
