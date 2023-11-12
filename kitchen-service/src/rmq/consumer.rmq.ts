@@ -16,7 +16,7 @@ export class RmqConsumer implements OnModuleInit {
   async onModuleInit() {
     await this.connect();
     await this.setupFanoutExchange('orders');
-    await this.consumeMessages('order.notification');
+    await this.consumeMessages('order.kitchen');
   }
 
   private async connect() {
@@ -32,10 +32,10 @@ export class RmqConsumer implements OnModuleInit {
   private async consumeMessages(queueName: string) {
     await this.channel.assertQueue(queueName, { durable: false });
     await this.channel.bindQueue(queueName, 'orders', '');
+    console.log('Listening...');
     this.channel.consume(queueName, async (msg) => {
       if (msg !== null) {
         const data = JSON.parse(msg.content.toString());
-        console.log(data);
         const response = await this.orderModel
           .findByIdAndUpdate(
             data._id,
@@ -45,7 +45,7 @@ export class RmqConsumer implements OnModuleInit {
             { new: true },
           )
           .exec();
-        console.log(response);
+        console.log(response.status);
         this.channel.ack(msg);
       }
     });

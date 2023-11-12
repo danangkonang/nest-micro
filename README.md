@@ -10,6 +10,11 @@ docker-compose up --build -d
 # Seed Data
 docker exec -i order /bin/bash -c "npm run seed"
 ```
+
+## PostMan
+
+- Import [micro.postman_collection.json](https://raw.githubusercontent.com/danangkonang/nest-micro/master/micro.postman_collection.json) And [micro.postman_environment.json](https://raw.githubusercontent.com/danangkonang/nest-micro/master/micro.postman_environment.json)
+
 ## Endpoint
 
 - Auth

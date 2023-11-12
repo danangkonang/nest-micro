@@ -28,9 +28,11 @@ export class AppConsumer implements OnModuleInit {
   private async consumeMessages(queueName: string) {
     await this.channel.assertQueue(queueName, { durable: false });
     await this.channel.bindQueue(queueName, 'orders', '');
+    console.log('Listening...');
     this.channel.consume(queueName, async (msg) => {
       if (msg !== null) {
         const data = JSON.parse(msg.content.toString());
+        console.log(data.email);
         let tmp = `<table>
                       <tr>
                         <th>No</th>
