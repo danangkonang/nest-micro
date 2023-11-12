@@ -6,6 +6,9 @@
 git clone https://github.com/danangkonang/nest-micro.git
 cd nest-micro
 docker-compose up --build -d
+
+# Seed Data
+docker exec -i order /bin/bash -c "npm run seed"
 ```
 ## Endpoint
 

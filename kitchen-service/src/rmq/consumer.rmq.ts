@@ -35,7 +35,8 @@ export class RmqConsumer implements OnModuleInit {
     this.channel.consume(queueName, async (msg) => {
       if (msg !== null) {
         const data = JSON.parse(msg.content.toString());
-        await this.orderModel
+        console.log(data);
+        const response = await this.orderModel
           .findByIdAndUpdate(
             data._id,
             {
@@ -44,6 +45,7 @@ export class RmqConsumer implements OnModuleInit {
             { new: true },
           )
           .exec();
+        console.log(response);
         this.channel.ack(msg);
       }
     });

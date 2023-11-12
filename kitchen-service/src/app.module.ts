@@ -5,7 +5,7 @@ import { RmqConsumer } from './rmq/consumer.rmq';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017', {
+    MongooseModule.forRoot('mongodb://mongo:27017', {
       dbName: 'restaurant',
     }),
     MongooseModule.forFeature([{ name: 'Order', schema: OrderSchema }]),
