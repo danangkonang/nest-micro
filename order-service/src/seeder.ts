@@ -1,6 +1,6 @@
 import { createConnection } from 'mongoose';
 
-const connection = createConnection('mongodb://localhost:27017/restaurant');
+const connection = createConnection('mongodb://mongo:27017/restaurant');
 
 const foodArray = [
   { name: 'Mie', price: 10000 },

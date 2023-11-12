@@ -17,7 +17,7 @@ export class RmqService implements OnModuleInit, OnModuleDestroy {
   }
 
   private async connect() {
-    this.connection = await amqplib.connect('amqp://localhost:5672');
+    this.connection = await amqplib.connect('amqp://rabbitmq:5672');
     this.channel = await this.connection.createChannel();
   }
 
